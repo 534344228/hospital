@@ -1,0 +1,229 @@
+.page-header h1{
+	font-size:20px;
+}
+#moduleTab {
+    width: 1052px;
+}
+.cmdSort{
+	color:#ff9000;
+}
+/*moduleList.jsp*/
+.modulename{
+	width:230px;
+	margin-top:25px;
+	
+}
+#modulename{
+	padding-bottom:15px;
+}
+.modulebtn{
+    display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	color:#000;
+	font-weight: 400;
+	line-height: 1;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
+	border: 1px solid #dddddd;
+	border-radius: 4px;
+}
+.modulebtn:hover{
+	text-decoration:none;
+}
+/*表格的样式*/
+.moduletable{
+	text-align:center;
+	width: 1052px;
+}
+.moduletable th{
+	text-align:center;
+}
+/*表格的样式*/
+/*moduleList.jsp*/
+
+/*addModule.jsp*/
+.htlttz_label {
+	float: left;
+	text-align: right;
+	width: 100px;
+	line-height: 30px;
+	height: 30px;
+	display: inline;
+}
+.upfilebig{
+	position:absolute;
+	top:-30px;
+	}
+.upfileBtnbig {
+    width: 300px;
+    height: 28px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer;
+}
+.upfiletextbig {
+    position: absolute;
+    top: 0px;
+    left: 10;
+    z-index: 999;
+    width: 395px;
+    height: 28px;
+    line-height: 28px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
+}
+.fileInputbig {
+    width: 408px;
+    border: 1px solid #e0e0e0;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 28px;
+    line-height: 28px;
+    font-family: "microsoft yahei";
+    color: #666;
+    background: url(../images/icon15_file.png) #fff 379px 13px no-repeat;
+    overflow: hidden;
+    position: relative;
+}
+.btnupload{
+	background:url(../images/buttonicon16_upload.png) 10px 5px #fff no-repeat;
+	width:65px;
+	padding-left:23px;
+	height:28px;
+	color:#666;
+	line-height:28px;
+	font-size:13px;
+	border:1px solid #e0e0e0;
+	font-family:"microsoft yahei";
+	cursor:pointer;
+}
+.btndownload{
+	background:url(../images/icon16_download.png) 10px 5px #fff no-repeat;
+	width:100px;
+	padding-left:23px;
+	height:28px;
+	color:#666;
+	line-height:28px;
+	font-size:13px;
+	border:1px solid #e0e0e0;
+	font-family:"microsoft yahei";
+	cursor:pointer;
+}
+.fl{ float:left;}
+.ml20{ margin-left:20px;}
+.ml10{ margin-left:10px;}
+.upfile{padding:15px 0;}
+
+.glyphicon.glyphicon-pencil {
+	color:#f83e07;	
+    float: right;
+}
+.glyphicon.glyphicon-pencil:hover{
+	cursor: pointer;
+}
+#addmodule .table{
+	width:960px;
+}
+#addmodule .module{
+	width:100px;
+}
+#addmodule .moduletext{
+	width:269px;
+}
+#addmodule .l{
+	width:323px;
+}
+#addmodule .cmd{
+	padding-top:5px;
+	padding-bottom:5px;
+}
+#addmodule input[type="text"]{
+	width:243px;
+}
+#addmodule input[type="radio"]{
+	margin-right:5px;
+}
+#addmodule .col-md-2{
+	width:115px;
+}
+#addmodule .addcmd{
+	background:rgba(248, 244, 244,0.3);
+	width:473px;
+}
+#addmodule .cmdoper{
+	width:120px;
+	text-align: center;
+	line-height: 10;
+}
+.saveCmdList{
+	float:right;
+	width:150px;
+}
+/*addModule.jsp*/
+
+/*updateModule.jsp*/
+#upmodule {
+    margin-top: 0px;
+    padding-bottom: 0px;
+}
+#upmodule .module{
+	width:85px;
+	padding-right:0px;
+}
+#upmodule .moduletext{
+	width:200px;
+}
+#upmodule .moduledesc{
+	width:275px;
+}
+
+/*updateModule.jsp*/
+
+/*updateCmdList.jsp*/
+#cmdExp{
+	
+}
+#cmdExpression{
+	width:255px;
+}
+
+/*updateCmdList.jsp*/
+
+/*updateCmd.jsp*/
+#updateCmd{
+	margin-top:15px;
+}
+#updateCmd .col-xs-4{
+	padding-bottom:15px;
+	padding-left:25px;
+	text-align:left;
+}
+#updateCmd .col-xs-8{
+	padding-bottom:15px;
+	padding-left:25px;
+	text-align:left;
+}
+#updateCmd input[type="button"]{
+	margin-left:0px;
+	width:150px;
+} 
+#updateCmd input[type="text"]{
+	width:268px;
+}
+#updateCmd input[type="radio"]{
+	margin-left: 8px;
+}
+/*updateCmd.jsp*/

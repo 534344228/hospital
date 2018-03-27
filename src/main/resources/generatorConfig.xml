@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<classPathEntry
+		location="D:\Maven\repository\mysql\mysql-connector-java\5.1.45\mysql-connector-java-5.1.45.jar" />
+	<context id="context1">
+		<jdbcConnection connectionURL="jdbc:mysql://localhost:3306/hospital"
+			driverClass="com.mysql.jdbc.Driver" password="196812" userId="root" />
+
+		<javaModelGenerator targetPackage="com.shd.model.pojo"
+			targetProject="hospital">
+			<property name="rootClass" value="MybatisObject" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="com.shd.dao.mapper"
+			targetProject="hospital" />
+
+		<javaClientGenerator targetPackage="com.shd.dao.mapper"
+			targetProject="hospital" type="XMLMAPPER" />
+
+		<table tableName="chinese" />
+		<table tableName="medicine" />
+		<table tableName="patient" />
+		<table tableName="prescription" />
+		<table tableName="sys_cfg" />
+		<table tableName="sys_log" />
+		<table tableName="sys_menu" />
+		<table tableName="sys_user" />
+		<table tableName="sys_user_menu" />
+		<table tableName="sys_user_role" />
+		<table tableName="west" />
+		<table tableName="zybm" />
+	</context>
+</generatorConfiguration>

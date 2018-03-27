@@ -1,0 +1,137 @@
+
+/* #page {
+	height: 520px;
+	padding: 20px;
+	background: white;
+} */
+
+body{
+	font-family: Microsoft YaHei;
+}
+
+.container-fluid{
+	margin-top: 51px;
+	/* background: #eee; */
+}
+
+.oper-panel {
+	padding-left:0px;
+	padding-right: 0px;
+}
+
+.oper-page {
+    height: auto!important;
+    min-height: 90px;
+    /* height: 530px; */
+    padding: 10px;
+    background: white;
+    margin-bottom: 10px;
+}
+.oper-page2{
+	height: auto!important;
+    min-height: 140px;
+    /* height: 530px; */
+    background: white;
+}
+
+#left-panel {
+	position: fixed;
+	border: 0px;
+	margin-bottom: 0px;
+	border-radius: 0px;
+	/* margin-top: 51px; */
+	/* display: none; */
+	width: 188px;
+	background-color: #333;
+	padding: 0px;
+	color: #eee;
+	height:100%;
+}
+
+#menuHide {
+    font-size: 18px;
+    position: fixed;
+    margin-top: 20%;
+    margin-left: -22px;
+    color: #333;
+}
+
+/* .menu-btn {
+	width: 20px;
+	height: 600px;
+	line-height: 600px;
+	left: -2px;
+	position: absolute;
+} */
+
+.title{
+	font-family: "微软雅黑";
+	font-size: 18px;
+	margin-left:5px;
+}
+
+#left-panel>.list-group>.list-group-item {
+	font-family: "微软雅黑";
+	font-size: 14px;
+	background-color: #2A2B30;
+	height: 45px;
+	border: 0px;
+	line-height: 21px;
+}
+
+#left-panel>.list-group>.child-list>.list-group-item {
+	font-family: "微软雅黑";
+	border: 0px;
+	height: 45px;
+	line-height: 21px;
+}
+
+/* a.list-group-item {
+	color: #9da0a7;
+} */
+
+.spread {
+	float: right;
+	line-height: 30px;
+}
+
+.group-item {
+	background-color: #333;
+	padding-left:15px;
+	color: #000;
+}
+
+.child-list {
+	display: none;
+	margin-bottom: 0px;
+}
+
+a.p-group-item:hover {
+	background-color: #2A2B30;
+	color: #9da0a7;
+}
+
+/* a.group-item:link{
+	background-color: #333;
+	
+} */
+
+a.group-item:hover{
+	background-color: #85B8EC;
+	color: #fff;
+}
+a.group-item:visited  {
+	background-color: #333;
+	color: #fff;
+}
+
+.container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: 185px; 
+}
+.title-icon {
+	font-size: 12px;
+    margin-left: 3px;
+}

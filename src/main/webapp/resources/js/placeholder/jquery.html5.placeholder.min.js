@@ -1,0 +1,6 @@
+/*!
+*   jQuery HTML5 Placeholder plugin
+*   Copyright (c) 2010 Ciprian Gavrilovici (MS-PL Licence)
+*   http://html5placeholder.codeplex.com
+*/
+(function(b){var e="placeholder"in document.createElement("input");b.fn.html5Placeholder=function(){if(!e){var c=b(this),d=function(){var a=b(this);if(a.hasClass("html5-placeholder")){a.removeClass("html5-placeholder");a.val("")}};c.focus(d).blur(function(){var a=b(this);if(a.val()==""){a.addClass("html5-placeholder");a.val(a.attr("placeholder"))}});c.parentsUntil(null,"form").delay(10).submit(function(a){a.result!==false&&b(this).find("input[placeholder]").each(d)});c.blur()}};b(function(){b("input[placeholder]").html5Placeholder();b("textarea[placeholder]").html5Placeholder();})})(jQuery);
