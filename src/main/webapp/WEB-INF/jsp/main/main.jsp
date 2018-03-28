@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="path" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -133,7 +135,6 @@
 					<button type="button" class="btn btn-default" onclick="search()">查询</button>
 				</div>
 				<div id="diseaseInfo" style="width: 95%; height: 472px; left: 30px;"></div>
-
 			</div>
 		</div>
 		<div class="col-md-6 oper-page2"
@@ -156,288 +157,284 @@
 				</div>
 				<div id="medicineInfo"
 					style="width: 95%; height: 472px; left: 50px;"></div>
-
 			</div>
 		</div>
+	</div>
 
-		<script type="text/javascript">
-			$(function() {
-				$('.datepicker').datepicker();
-				var startTime = $("#startTime").val();
-				var endTime = $("#endTime").val();
-				var startTimes = $("#startTimes").val();
-				var endTimes = $("#endTimes").val();
-				prescription(startTime, endTime);
-				medicineInfo(startTimes, endTimes);
-			});
+	<script type="text/javascript">
+		$(function() {
+			$('.datepicker').datepicker();
+			var startTime = $("#startTime").val();
+			var endTime = $("#endTime").val();
+			var startTimes = $("#startTimes").val();
+			var endTimes = $("#endTimes").val();
+			prescription(startTime, endTime);
+			medicineInfo(startTimes, endTimes);
+		});
 
-			function checkDate() {
-				var startTime = $("#startTime").val();
-				var endTime = $("#endTime").val();
-				if (startTime && endTime) {
-					if (startTime > endTime) {
-						dialogShow("结束时间必须大于开始时间");
-						$("#endTime").val("");
-					} else {
-						return true;
-					}
+		function checkDate() {
+			var startTime = $("#startTime").val();
+			var endTime = $("#endTime").val();
+			if (startTime && endTime) {
+				if (startTime > endTime) {
+					dialogShow("结束时间必须大于开始时间");
+					$("#endTime").val("");
+				} else {
+					return true;
 				}
 			}
+		}
 
-			function checkDate1() {
-				var startTime = $("#startTimes").val();
-				var endTime = $("#endTimes").val();
-				if (startTime && endTime) {
-					if (startTime > endTime) {
-						dialogShow("结束时间必须大于开始时间");
-						$("#endTimes").val("");
-					} else {
-						return true;
-					}
+		function checkDate1() {
+			var startTime = $("#startTimes").val();
+			var endTime = $("#endTimes").val();
+			if (startTime && endTime) {
+				if (startTime > endTime) {
+					dialogShow("结束时间必须大于开始时间");
+					$("#endTimes").val("");
+				} else {
+					return true;
 				}
 			}
+		}
 
-			function search() {
-				var startTime = $("#startTime").val();
-				var endTime = $("#endTime").val();
-				prescription(startTime, endTime);
-			}
+		function search() {
+			var startTime = $("#startTime").val();
+			var endTime = $("#endTime").val();
+			prescription(startTime, endTime);
+		}
 
-			function searchMedicines() {
-				var startTimes = $("#startTimes").val();
-				var endTimes = $("#endTimes").val();
-				medicineInfo(startTimes, endTimes);
-			}
+		function searchMedicines() {
+			var startTimes = $("#startTimes").val();
+			var endTimes = $("#endTimes").val();
+			medicineInfo(startTimes, endTimes);
+		}
 
-			function prescription(startTime, endTime) {
-				/* document.getElementById('diseaseInfo').innerHTML = '';  */
-				prjSourceAkhtj = echarts.init(document
-						.getElementById('diseaseInfo'));
-				optionPrjSourceAkhtj = {
+		function prescription(startTime, endTime) {
+			/* document.getElementById('diseaseInfo').innerHTML = '';  */
+			prjSourceAkhtj = echarts.init(document
+					.getElementById('diseaseInfo'));
+			optionPrjSourceAkhtj = {
 
-					tooltip : {
-						trigger : 'item',
-						formatter : "{a} <br/>{b}: {c} ({d}%)"
+				tooltip : {
+					trigger : 'item',
+					formatter : "{a} <br/>{b}: {c} ({d}%)"
+				},
+				legend : {
+					/*orient: 'vertical',*/
+					x : 'right',
+					left : 'left',
+					top : 'top',
+					selectedMode : false,
+					textStyle : {
+						fontFamily : '宋体',
+						color : '#686868'
 					},
-					legend : {
-						/*orient: 'vertical',*/
-						x : 'right',
-						left : 'left',
-						top : 'top',
-						selectedMode : false,
-						textStyle : {
-							fontFamily : '宋体',
-							color : '#686868'
-						},
-						data : []
-					},
+					data : []
+				},
 
+				color : [ '#31B0D5', '#449D44', '#EC971F', '#286090',
+						'#999999', '#D6403B', '#24dd9C', '#27BB9C', '#2477dC',
+						'#F75000', '#80FFFF', '#93FF93', '#FFA042', '#95CACA' ],
+				series : [ {
+					name : '',
+					type : 'pie',
+					radius : [ '25%', '66%' ],
+					avoidLabelOverlap : true,
+					center : [ '50%', '55%' ],
 					color : [ '#31B0D5', '#449D44', '#EC971F', '#286090',
 							'#999999', '#D6403B', '#24dd9C', '#27BB9C',
 							'#2477dC', '#F75000', '#80FFFF', '#93FF93',
 							'#FFA042', '#95CACA' ],
-					series : [ {
-						name : '',
-						type : 'pie',
-						radius : [ '25%', '66%' ],
-						avoidLabelOverlap : true,
-						center : [ '50%', '55%' ],
-						color : [ '#31B0D5', '#449D44', '#EC971F', '#286090',
-								'#999999', '#D6403B', '#24dd9C', '#27BB9C',
-								'#2477dC', '#F75000', '#80FFFF', '#93FF93',
-								'#FFA042', '#95CACA' ],
-						itemStyle : {
-							normal : {
-								label : {
-									show : true
+					itemStyle : {
+						normal : {
+							label : {
+								show : true
 
-								},
-								labelLine : {
-									show : true,
-									length : 5,
-									length2 : 5,
-									smooth : false
-								},
-								borderWidth : 2,
-								borderColor : '#FFF'
+							},
+							labelLine : {
+								show : true,
+								length : 5,
+								length2 : 5,
+								smooth : false
+							},
+							borderWidth : 2,
+							borderColor : '#FFF'
+						}
+					},
+					data : []
+				} ]
+			};
+			var url = "${path}/main/getCountDisease.action";
+			var data = {
+				startTime : startTime,
+				endTime : endTime
+			};
+			$
+					.ajax({
+						type : 'GET',
+						url : url,
+						dataType : 'json',
+						data : data,
+						async : false,
+						success : function(map) {
+							for (var k = 0; k < map.countDiseaseList.length; k++) {
+								if (map.countDiseaseList.length == 1
+										&& map.countDiseaseList[k].text == "其他") {
+									optionPrjSourceAkhtj.series[0].data[k] = {
+										value : Number(map.countDiseaseList[k].count),
+										name : '其他'
+									};
+								} else if (map.countDiseaseList[k].count != 0
+										&& map.countDiseaseList[k].text != null) {
+									var value = Number(map.countDiseaseList[k].count);
+									optionPrjSourceAkhtj.series[0].data[k] = {
+										value : value,
+										name : ''
+									};
+								}
 							}
-						},
-						data : []
-					} ]
-				};
-				var url = "${path}/main/getCountDisease";
-				var data = {
-					startTime : startTime,
-					endTime : endTime
-				};
-				$
-						.ajax({
-							type : 'GET',
-							url : url,
-							dataType : 'json',
-							data : data,
-							async : false,
-							success : function(map) {
-								for (var k = 0; k < map.countDiseaseList.length; k++) {
-									if (map.countDiseaseList.length == 1
-											&& map.countDiseaseList[k].text == "其他") {
-										optionPrjSourceAkhtj.series[0].data[k] = {
-											value : Number(map.countDiseaseList[k].count),
-											name : '其他'
-										};
-									} else if (map.countDiseaseList[k].count != 0
-											&& map.countDiseaseList[k].text != null) {
-										var value = Number(map.countDiseaseList[k].count);
-										optionPrjSourceAkhtj.series[0].data[k] = {
-											value : value,
-											name : ''
-										};
-									}
+
+							for (var i = 0; i < optionPrjSourceAkhtj.series[0].data.length; i++) {
+								if (map.countDiseaseList[i].count != 0) {
+									optionPrjSourceAkhtj.legend.data
+											.push(map.countDiseaseList[i].text);
+									optionPrjSourceAkhtj.series[0].data[i].name = (map.countDiseaseList[i].text);
+
+									optionPrjSourceAkhtj.series[0].data[i].value = map.countDiseaseList[i].count;
 								}
 
-								for (var i = 0; i < optionPrjSourceAkhtj.series[0].data.length; i++) {
-									if (map.countDiseaseList[i].count != 0) {
-										optionPrjSourceAkhtj.legend.data
-												.push(map.countDiseaseList[i].text);
-										optionPrjSourceAkhtj.series[0].data[i].name = (map.countDiseaseList[i].text);
-
-										optionPrjSourceAkhtj.series[0].data[i].value = map.countDiseaseList[i].count;
-									}
-
-									if (optionPrjSourceAkhtj.series[0].data[i].value == 0) {
-										prjSourceAkhtj
-												.setOption({
-													legend : {
-														selected : {
-															'optionPrjSourceAkhtj.legend.data[i]' : false
-														}
-													}
-												});
-
-									}
+								if (optionPrjSourceAkhtj.series[0].data[i].value == 0) {
 									prjSourceAkhtj
-											.setOption(optionPrjSourceAkhtj);
+											.setOption({
+												legend : {
+													selected : {
+														'optionPrjSourceAkhtj.legend.data[i]' : false
+													}
+												}
+											});
 
 								}
+								prjSourceAkhtj.setOption(optionPrjSourceAkhtj);
 
 							}
-						});
-			}
 
-			function medicineInfo(startTimes, endTimes) {
+						}
+					});
+		}
 
-				//document.getElementById('medicineInfo').innerHTML = '';  
-				prjSourceAkhtj2 = echarts.init(document
-						.getElementById('medicineInfo'));
-				optionPrjSourceAkhtj2 = {
-					tooltip : {
-						trigger : 'item',
-						formatter : "{a} <br/>{b}: {c} ({d}%)"
+		function medicineInfo(startTimes, endTimes) {
+
+			//document.getElementById('medicineInfo').innerHTML = '';  
+			prjSourceAkhtj2 = echarts.init(document
+					.getElementById('medicineInfo'));
+			optionPrjSourceAkhtj2 = {
+				tooltip : {
+					trigger : 'item',
+					formatter : "{a} <br/>{b}: {c} ({d}%)"
+				},
+				legend : {
+					/*orient: 'vertical',*/
+					x : 'right',
+					left : 'left',
+					top : 'top',
+					selectedMode : false,
+					textStyle : {
+						fontFamily : '宋体',
+						color : '#686868'
 					},
-					legend : {
-						/*orient: 'vertical',*/
-						x : 'right',
-						left : 'left',
-						top : 'top',
-						selectedMode : false,
-						textStyle : {
-							fontFamily : '宋体',
-							color : '#686868'
-						},
-						data : []
-					},
+					data : []
+				},
 
+				color : [ '#31B0D5', '#449D44', '#EC971F', '#286090',
+						'#999999', '#D6403B', '#24dd9C', '#27BB9C', '#2477dC',
+						'#F75000', '#80FFFF', '#93FF93', '#FFA042', '#95CACA' ],
+				series : [ {
+					name : '',
+					type : 'pie',
+					radius : [ '25%', '66%' ],
+					avoidLabelOverlap : true,
+					center : [ '50%', '55%' ],
 					color : [ '#31B0D5', '#449D44', '#EC971F', '#286090',
 							'#999999', '#D6403B', '#24dd9C', '#27BB9C',
 							'#2477dC', '#F75000', '#80FFFF', '#93FF93',
 							'#FFA042', '#95CACA' ],
-					series : [ {
-						name : '',
-						type : 'pie',
-						radius : [ '25%', '66%' ],
-						avoidLabelOverlap : true,
-						center : [ '50%', '55%' ],
-						color : [ '#31B0D5', '#449D44', '#EC971F', '#286090',
-								'#999999', '#D6403B', '#24dd9C', '#27BB9C',
-								'#2477dC', '#F75000', '#80FFFF', '#93FF93',
-								'#FFA042', '#95CACA' ],
-						itemStyle : {
-							normal : {
-								label : {
-									show : true
+					itemStyle : {
+						normal : {
+							label : {
+								show : true
 
-								},
-								labelLine : {
-									show : true,
-									length : 5,
-									length2 : 5,
-									smooth : false
-								},
-								borderWidth : 2,
-								borderColor : '#FFF'
+							},
+							labelLine : {
+								show : true,
+								length : 5,
+								length2 : 5,
+								smooth : false
+							},
+							borderWidth : 2,
+							borderColor : '#FFF'
+						}
+					},
+					data : []
+				} ]
+			};
+			var url = "${path}/main/getCountMedicines";
+			var data = {
+				startTime : startTimes,
+				endTime : endTimes
+			};
+			$
+					.ajax({
+						type : 'GET',
+						url : url,
+						dataType : 'json',
+						data : data,
+						async : false,
+						success : function(map) {
+							for (var k = 0; k < map.countMedicinesList.length; k++) {
+								if (map.countMedicinesList.length == 1
+										&& map.countMedicinesList[k].medicineName == "其他") {
+									optionPrjSourceAkhtj2.series[0].data[k] = {
+										value : Number(map.countMedicinesList[k].count),
+										name : '其他'
+									};
+								} else if (map.countMedicinesList[k].count != 0
+										&& map.countMedicinesList[k].medicineName != null) {
+									var value = Number(map.countMedicinesList[k].count);
+									optionPrjSourceAkhtj2.series[0].data[k] = {
+										value : value,
+										name : ''
+									};
+								}
 							}
-						},
-						data : []
-					} ]
-				};
-				var url = "${path}/main/getCountMedicines";
-				var data = {
-					startTime : startTimes,
-					endTime : endTimes
-				};
-				$
-						.ajax({
-							type : 'GET',
-							url : url,
-							dataType : 'json',
-							data : data,
-							async : false,
-							success : function(map) {
-								for (var k = 0; k < map.countMedicinesList.length; k++) {
-									if (map.countMedicinesList.length == 1
-											&& map.countMedicinesList[k].medicineName == "其他") {
-										optionPrjSourceAkhtj2.series[0].data[k] = {
-											value : Number(map.countMedicinesList[k].count),
-											name : '其他'
-										};
-									} else if (map.countMedicinesList[k].count != 0
-											&& map.countMedicinesList[k].medicineName != null) {
-										var value = Number(map.countMedicinesList[k].count);
-										optionPrjSourceAkhtj2.series[0].data[k] = {
-											value : value,
-											name : ''
-										};
-									}
+
+							for (var i = 0; i < optionPrjSourceAkhtj2.series[0].data.length; i++) {
+								if (map.countMedicinesList[i].count != 0) {
+									optionPrjSourceAkhtj2.legend.data
+											.push(map.countMedicinesList[i].medicineName);
+									optionPrjSourceAkhtj2.series[0].data[i].name = map.countMedicinesList[i].medicineName;
+
+									optionPrjSourceAkhtj2.series[0].data[i].value = map.countMedicinesList[i].count;
 								}
 
-								for (var i = 0; i < optionPrjSourceAkhtj2.series[0].data.length; i++) {
-									if (map.countMedicinesList[i].count != 0) {
-										optionPrjSourceAkhtj2.legend.data
-												.push(map.countMedicinesList[i].medicineName);
-										optionPrjSourceAkhtj2.series[0].data[i].name = map.countMedicinesList[i].medicineName;
-
-										optionPrjSourceAkhtj2.series[0].data[i].value = map.countMedicinesList[i].count;
-									}
-
-									if (optionPrjSourceAkhtj2.series[0].data[i].value == 0) {
-										prjSourceAkhtj2
-												.setOption({
-													legend : {
-														selected : {
-															'optionPrjSourceAkhtj2.legend.data[i]' : false
-														}
-													}
-												});
-
-									}
+								if (optionPrjSourceAkhtj2.series[0].data[i].value == 0) {
 									prjSourceAkhtj2
-											.setOption(optionPrjSourceAkhtj2);
+											.setOption({
+												legend : {
+													selected : {
+														'optionPrjSourceAkhtj2.legend.data[i]' : false
+													}
+												}
+											});
 
 								}
+								prjSourceAkhtj2
+										.setOption(optionPrjSourceAkhtj2);
 
 							}
-						});
-			}
-		</script>
+						}
+					});
+		}
+	</script>
 </body>
 </html>

@@ -98,14 +98,6 @@
 <c:if test="${param.echarts=='true'}">
 	<script type="text/javascript" src="${path}/resources/js/echarts/echarts.min.js"></script>
 	<script type="text/javascript" src="${path}/resources/js/echarts/echarts-liquidfill.js"></script>
-<!-- 	<script type="text/javascript"> -->
-//         // 路径配置
-//         require.config({
-//             paths: {
-//                 'echarts' : '${path}/resources/js/echarts'
-//             }
-//         });
-<!--     </script> -->
 </c:if>
 
 <c:if test="${param.cxselect=='true'}">
