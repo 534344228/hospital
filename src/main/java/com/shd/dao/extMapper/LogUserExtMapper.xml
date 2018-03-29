@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shd.dao.extMapper.LogUserExtMapper">
+	<resultMap id="extMap" type="com.shd.model.pojoExt.LogUserExt"
+		extends="com.shd.dao.mapper.SysLogMapper.BaseResultMap">
+		<association property="user" column="USER_ID"
+			resultMap="com.shd.dao.mapper.SysUserMapper.BaseResultMap" />
+	</resultMap>
+
+	<select id="queryLogList" parameterType="java.util.Map"
+		resultMap="extMap">
+		SELECT log.LOG_ID,log.LOG_TYPE,log.LOG_DETAILS,log.CREATE_TIME,
+		u.USER_NAME
+		FROM sys_log log
+		LEFT JOIN sys_user u ON
+		log.CREATE_USER_ID=u.USER_ID
+		where log.DEL_STATE='Y'
+		<if test="startTime != null and startTime != ''">
+			and log.CREATE_TIME <![CDATA[>=]]>#{startTime}
+		</if>
+		<if test="endTime != null and endTime != ''">
+			and log.CREATE_TIME <![CDATA[<=]]>
+			#{endTime}
+		</if>
+		ORDER BY CREATE_TIME DESC
+	</select>
+</mapper>

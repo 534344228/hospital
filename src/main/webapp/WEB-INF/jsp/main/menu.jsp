@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <style type="text/css">
@@ -378,7 +377,7 @@ a.offUrl:hover {
 
 	function operManage(childPath) {
 		loadingOpen();
-		var url = "${path }" + childPath;
+		var url = "${path }" + childPath+".action";
 		window.location.href = url;
 	}
 
@@ -436,24 +435,26 @@ a.offUrl:hover {
 	}
 </script>
 <!-- 左侧菜单 -->
-<div id="left-panel" class="panel col-md-2 col-sm-12"
-	style="top: 51px; width: 189px;">
+<div id="left-panel" class="panel col-md-2 col-sm-12" style="top: 51px; width: 189px;">
 	<div id="menu_list" class="list-group text-left bar_scroll">
-		<a class="offUrl list-group-item" id="hide-btn"
-			style="font-size: 12px; height: 35px; line-height: 11px;"><i
-			class="left_menu"></i></a>
+		<a class="offUrl list-group-item" id="hide-btn" style="font-size: 12px; height: 35px; line-height: 11px;">
+			<i class="left_menu"></i>
+		</a>
 
 		<c:forEach items="${userMenuList}" var="s">
-			<a class="offUrl list-group-item p-group-item"><i
-				class="icon-left"></i>&#12288;<span class="title-txt">${s.menu.menuName }</span></a>
+			<a class="offUrl list-group-item p-group-item">
+				<i class="icon-left"></i>
+				&#12288;
+				<span class="title-txt">${s.menu.menuName }</span>
+			</a>
 			<c:if test="${not empty secondMenuMap[s.menuId]}">
 				<div class="list-group child-list">
 					<c:forEach items="${secondMenuMap[s.menuId]}" var="a">
-						<a class="offUrl list-group-item group-item"
-							href="javascript:void(0)" id="menu_${a.menu.menuUrl }"
-							onclick="operManage('${a.menu.menuUrl }')"><i
-							class="${a.menu.menuIconUrl}" style="margin-left: 10px;"></i>&#12288;<span
-							class="list-group-txt">${a.menu.menuName }</span></a>
+						<a class="offUrl list-group-item group-item" href="javascript:void(0)" id="menu_${a.menu.menuUrl }" onclick="operManage('${a.menu.menuUrl }')">
+							<i class="${a.menu.menuIconUrl}" style="margin-left: 10px;"></i>
+							&#12288;
+							<span class="list-group-txt">${a.menu.menuName }</span>
+						</a>
 					</c:forEach>
 				</div>
 			</c:if>

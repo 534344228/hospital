@@ -9,8 +9,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<package name="com.shd.model" />
 	</typeAliases>
 	<plugins>
-		<plugin interceptor="com.github.pagehelper.PageInterceptor">
-			<property name="helperDialect" value="mysql" />
+		<plugin interceptor="com.shd.common.page.PageHelper">
+			<property name="dialect" value="mysql" />
 		</plugin>
 	</plugins>
 </configuration>

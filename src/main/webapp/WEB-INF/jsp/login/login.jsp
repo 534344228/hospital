@@ -1,50 +1,52 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
-<style type="text/css">
+<style>
 .iconball {
-	height: 100%;
-	width: 100%;
-	background: url(${path}/resources/images/2.png) no-repeat 50%;
-	animation: rotateFsash 8s linear infinite;
-	-webkit-animation: rotateFsash 8s linear infinite;
-	    background-size: 70%;
-	/*Safari and Chrome*/
+    height: 100%;
+    width: 100%;
+    background: url(${path}/resources/images/2.png) no-repeat 50%;
+    animation: rotateFsash 8s linear infinite;
+    -webkit-animation: rotateFsash 8s linear infinite;
+    background-size: 70%;
+    /*Safari and Chrome*/
 }
-.ballDiv{
+
+.ballDiv {
     height: 323px;
     width: 420px;
     background-color: #074771;
     border-radius: 20px;
 }
+
 .bigball {
-	float:right;
+    float: right;
 }
 
 @-webkit-keyframes rotateFsash { 0% {
-	-webkit-transform: rotate(0deg);
-	transform: rotate(0deg)
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg)
 }
 
 to {
-	-webkit-transform: rotate(1turn);
-	transform: rotate(1turn)
+    -webkit-transform: rotate(1turn);
+    transform: rotate(1turn)
 }
 
 }
 @keyframes rotateFsash { 0% {
-	-webkit-transform: rotate(0deg);
-	transform: rotate(0deg)
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg)
 }
 
 to {
-	-webkit-transform: rotate(1turn);
-	transform: rotate(1turn)
+    -webkit-transform: rotate(1turn);
+    transform: rotate(1turn)
 }
+
 }
-.loginDiv{
-	    float: right;
+.loginDiv {
+    float: right;
     height: 303px;
     width: 38%;
     margin-right: 7%;
@@ -54,94 +56,78 @@ to {
 }
 </style>
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-<title>名老中医药专家医案管理系统</title>
+<title>中医药专家医案管理系统</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="${path}/css/login.css">
-<link href="${path}/resources/css/jquery.confirm.css" rel="stylesheet"
-	type="text/css">
-<script src="${path}/resources/js/jquery-1.9.1.min.js"
-	type="text/javascript"></script>
-<script src="${path}/resources/js/slidecop.js" type="text/javascript"></script>
-<script src="${path}/resources/js/jquery.confirm.js"
-	type="text/javascript"></script>
-<title></title>
-<script language="javascript">
-	$(function() {
-		var openValidate = "${openValidate.cfgValue}";
-		if (openValidate == 'Y') {
-			$("#chk").hide();
-		}
-	})
-</script>
+<link rel="stylesheet" href="${path}/resources/css/login.css">
+<link href="${path}/resources/css/jquery.confirm.css" rel="stylesheet" type="text/css">
+
 </head>
 <body>
-	<!-- <div class="login-area">
-	<div class="login-header">
-		<div class="wrapper">
-			<div class="divider-line"></div>
-			<p class="nj-title">江苏省中西医结合医院</p>
-		</div>
-	</div> -->
-	
 	<div class="login-content">
 		<div class="wrapper">
 			<div class="login-main">
-               
-				<div class="login" style="width:1000px;height:380px">
-				
+				<div class="login" style="width: 1000px; height: 380px">
 					<div class="loginDiv">
-					 <div style=" font-size: 24px;color: #fff;margin-bottom: 9px;">名老中医药专家医案管理系统</div>
-						<form method="post" action="${path}/login/accessLogin">
-						<ul>
-							<li class="icon-left"><i class="icon ion-user"></i> <input
-								name="userAcc" id="username" type="text" placeholder="用户名">
-							</li>
-							<div id="user"></div>
-							<li class="icon-left"><i class="icon ion-pwd"></i> <input
-								name="userPwd" id="password" type="password" placeholder="密码">
-							</li>
-							<div id="pwd"></div>
-							<c:if test="${openValidate.cfgValue eq 'Y'}">
-								<li><input name="verifyCode" id="vercode" class="authCode" type="text" placeholder="验证码"> <span class="qcode">
-									<img id="verifyImage" src="${path}/login/captcha"onclick="reloadVerifyCode()" width="100%" height="40px" style="background-color: #fff;"></span>
-									<span onclick="reloadVerifyCode()" class="next-btn">换一张</span>
+						<div style="font-size: 24px; color: #fff; margin-bottom: 9px;">中医药专家医案管理系统</div>
+						<form method="post" action="${path}/login/accessLogin.action">
+							<ul>
+								<li class="icon-left">
+									<i class="icon ion-user"></i>
+									<input name="userAcc" id="username" type="text" placeholder="用户名" required="required">
 								</li>
+								<div id="user"></div>
+								<li class="icon-left">
+									<i class="icon ion-pwd"></i>
+									<input name="userPwd" id="password" type="password" placeholder="密码" required="required">
+								</li>
+								<div id="pwd"></div>
+								<c:if test="${openValidate.cfgValue eq 'Y'}">
+									<li>
+										<input name="verifyCode" id="vercode" class="authCode" type="text" placeholder="验证码" required="required">
+										<span class="qcode">
+											<img id="verifyImage" src="${path}/login/captcha.action" onclick="reloadVerifyCode()" width="100%" height="40px" style="background-color: #fff;">
+										</span>
+										<span onclick="reloadVerifyCode()" class="next-btn">换一张</span>
+									</li>
+								</c:if>
+								<div id="chk"></div>
+								<li>
+									<button type="submit" class="button button-block button-color1">登录</button>
+								</li>
+							</ul>
+							<c:if test="${!empty loginErrorMessage}">
+								<div class="form-group col-md-12">
+									<font color="red">登录失败：${loginErrorMessage }</font>
+								</div>
 							</c:if>
-							<div id="chk"></div>
-							<li>
-								<button type="submit" class="button button-block button-color1">登录</button>
-							</li>
-						</ul>
-						<c:if test="${!empty loginErrorMessage}">
-							<div class="form-group col-md-12">
-								<font color="red">登录失败：${loginErrorMessage }</font>
-							</div>
-						</c:if>
-					</form>
-					
+						</form>
+
 					</div>
-					
+
 					<div class="bigball">
-					<div class="ballDiv">
-					<div class="iconball"></div>
+						<div class="ballDiv">
+							<div class="iconball"></div>
+						</div>
 					</div>
-				</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- <div class="login-footer">
-		<div class="wrapper">
-			版权所有 © 南京欣华软件技术有限公司 2016-2018。 保留一切权利。
-		</div>
-	</div> -->
-	</div>
+	<script src="${path}/resources/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+	<script src="${path}/resources/js/slidecop.js" type="text/javascript"></script>
+	<script src="${path}/resources/js/jquery.confirm.js" type="text/javascript"></script>
 	<script>
+		$(function() {
+			var openValidate = "${openValidate.cfgValue}";
+			if (openValidate == 'Y') {
+				$("#chk").hide();
+			}
+		})
 		function reloadVerifyCode() {
 			$("#verifyImage").attr("src",
-					"${path}/login/captcha?random=" + Math.random());
+					"${path}/login/captcha.action?random=" + Math.random());
 		}
 		function checkform1() {
 
@@ -152,7 +138,6 @@ to {
 			$("#loginBtn").attr({
 				'disabled' : true
 			});
-
 			var var1 = document.getElementById("username").value;
 			var var2 = document.getElementById("password").value;
 			var var3 = document.getElementById("vercode").value;
@@ -222,7 +207,6 @@ to {
 					});
 				},
 				error : function(result) {
-					//alert(result);
 					$("#loginBtn").attr({
 						'disabled' : false
 					});
@@ -236,6 +220,5 @@ to {
 			}
 		});
 	</script>
-
 </body>
 </html>

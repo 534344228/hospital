@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shd.dao.extMapper.UserMenuExtMapper">
+	<resultMap id="extMap" type="com.shd.model.pojoExt.UserMenuExt"
+		extends="com.shd.dao.mapper.SysUserMenuMapper.BaseResultMap">
+		<id column="FIRST_MENU_ID" property="menuId" jdbcType="VARCHAR" />
+		<association property="menu"
+			resultMap="com.shd.dao.mapper.SysMenuMapper.BaseResultMap">
+			<id column="SECOND_MENU_ID" property="menuId" jdbcType="VARCHAR" />
+		</association>
+	</resultMap>
+
+	<select id="querySysMenuList" parameterType="java.lang.String"
+		resultMap="extMap">
+		SELECT um.menu_id FIRST_MENU_ID,m.menu_id SECOND_MENU_ID
+		,m.menu_parent_id,m.menu_name,m.MENU_URL
+		FROM sys_user_menu um
+		LEFT JOIN
+		sys_menu m on um.menu_id = m.menu_id
+		WHERE m.menu_parent_id is NULL
+		and
+		um.USER_ID = #{userId}
+		and um.del_state = 'Y'
+		order by m.sort_key
+	</select>
+
+	<select id="querySecondSysMenuList" parameterType="java.util.Map"
+		resultMap="extMap">
+		SELECT um.menu_id FIRST_MENU_ID,m.menu_id
+		SECOND_MENU_ID,m.menu_parent_id,m.menu_name,m.MENU_URL,m.MENU_ICON_URL
+		FROM sys_user_menu um
+		INNER JOIN sys_menu m on um.menu_id = m.menu_id
+		WHERE m.menu_parent_id is not NULL
+		and um.USER_ID = #{userId}
+		and
+		m.menu_parent_id = #{menuId}
+		and um.del_state = 'Y'
+		order by m.sort_key
+	</select>
+</mapper>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shd.dao.extMapper.PrescriptionExtMapper">
+	<resultMap id="extMap" type="com.shd.model.pojoExt.PrescriptionExt"
+		extends="com.shd.dao.mapper.PrescriptionMapper.BaseResultMap">
+		<result column="count" property="count" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		p.visits,p.pname,p.western_diagnosis
+		westernDiagnosis,p.medical_history medicalHistory,
+		p.equipment_inspection equipmentInspection,p.physical_examination
+		physicalExamination,
+		p.west_medicines westMedicines,p.py_abb
+		pyAbb,p.visit_time visitTime,
+		p.prescription_id prescriptionId,
+		p.Treatment_cycle treatmentCycle,
+		p.create_user createUser,
+		p.create_time createTime, p.modify_user modifyUser, p.modify_time
+		modifyTime,
+		p.del_state delState, p.prescription_introduce
+		prescriptionIntroduce,
+		p.disease,
+		p.iusage,p.medicines,
+		u.user_name
+		userName,pa.patient_name patientName,pa.patient_birthday
+		patientBirthday,pa.patient_age patientAge,pa.patient_genderId
+		patientGenderid
+	</sql>
+	<select id="queryPrescriptionList" parameterType="com.shd.model.pojoExt.PrescriptionExt"
+		resultType="com.shd.model.pojoExt.PrescriptionExt">
+		select
+		<include refid="Base_Column_List"></include>
+		from prescription p
+		LEFT JOIN patient pa ON p.prescription_id
+		=pa.pres_id
+		LEFT JOIN sys_user u ON p.create_user = u.USER_ID
+		where
+		p.DEL_STATE='Y'
+
+		<if test="patientName != null and patientName != '' ">
+			<bind name="patientName" value=" '%' + patientName + '%' " />
+			and pa.patient_name like #{patientName}
+		</if>
+		<if test="westernDiagnosis != null and westernDiagnosis != '' ">
+			<bind name="westernDiagnosis" value=" '%' + westernDiagnosis + '%' " />
+			and p.western_diagnosis like #{westernDiagnosis}
+		</if>
+		<if test="dise != null and dise != '' ">
+			<bind name="dise" value=" '%' + dise + '%' " />
+			and p.disease like #{dise}
+		</if>
+		<if test="medicineName!= null and medicineName!= '' ">
+			<bind name="medicineName" value=" '%' + medicineName+ '%' " />
+			and p.medicines like #{medicineName}
+		</if>
+
+		<if test="startTime != null and startTime != ''">
+			and p.visit_time <![CDATA[>=]]>#{startTime}
+		</if>
+		<if test="endTime != null and endTime != ''">
+			and p.visit_time <![CDATA[<=]]>
+			#{endTime}
+		</if>
+
+		order by p.create_time DESC
+	</select>
+
+	<select id="searchAll" parameterType="java.lang.String"
+		resultType="java.util.Map">
+		CALL proc_FindStrInAllDataBase ('app',#{para});
+	</select>
+
+	<insert id="insertPrescriptions" parameterType="java.util.List">
+
+		insert into prescription (prescription_id, visits, pname,
+		py_abb,visit_time,
+		iusage, Treatment_cycle, create_user,
+		create_time,
+		modify_user, modify_time,
+		del_state, prescription_introduce,
+		western_diagnosis,
+		disease, medical_history, equipment_inspection,
+		physical_examination, west_medicines,
+		medicines)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.prescriptionId,jdbcType=VARCHAR},
+			#{item.visits,jdbcType=INTEGER}, #{item.pname,jdbcType=VARCHAR},
+			#{item.pyAbb,jdbcType=VARCHAR},#{item.visitTime,jdbcType=TIMESTAMP},
+			#{item.iusage,jdbcType=VARCHAR},
+			#{item.treatmentCycle,jdbcType=VARCHAR},
+			#{item.createUser,jdbcType=VARCHAR},
+			#{item.createTime,jdbcType=TIMESTAMP},
+			#{item.modifyUser,jdbcType=VARCHAR},
+			#{item.modifyTime,jdbcType=TIMESTAMP},
+			#{item.delState,jdbcType=VARCHAR},
+			#{item.prescriptionIntroduce,jdbcType=LONGVARCHAR},
+			#{item.westernDiagnosis,jdbcType=LONGVARCHAR},
+			#{item.disease,jdbcType=LONGVARCHAR},
+			#{item.medicalHistory,jdbcType=LONGVARCHAR},
+			#{item.equipmentInspection,jdbcType=LONGVARCHAR},
+			#{item.physicalExamination,jdbcType=LONGVARCHAR},
+			#{item.westMedicines,jdbcType=LONGVARCHAR},
+			#{item.medicines,jdbcType=LONGVARCHAR})
+		</foreach>
+	</insert>
+	<insert id="insertPatients" parameterType="java.util.List">
+
+		insert into patient (patient_id, patient_name, patient_birthday,
+		patient_age, patient_genderId, pres_id,
+		create_user, create_time,
+		modify_user,
+		modify_time, del_state)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.patientId,jdbcType=VARCHAR},
+			#{item.patientName,jdbcType=VARCHAR},
+			#{item.patientBirthday,jdbcType=DATE},
+			#{item.patientAge,jdbcType=INTEGER},
+			#{item.patientGenderid,jdbcType=VARCHAR},
+			#{item.presId,jdbcType=VARCHAR},
+			#{item.createUser,jdbcType=VARCHAR},
+			#{item.createTime,jdbcType=TIMESTAMP},
+			#{item.modifyUser,jdbcType=VARCHAR},
+			#{item.modifyTime,jdbcType=TIMESTAMP},
+			#{item.delState,jdbcType=VARCHAR})
+		</foreach>
+	</insert>
+
+	<select id="countDisease" parameterType="com.shd.model.pojo.Prescription"
+		resultType="java.lang.Integer">
+		SELECT
+		count(1)
+		FROM
+		(
+		SELECT
+		disease,
+		COUNT(1),
+		del_state
+		FROM
+		prescription
+		GROUP BY
+		disease,del_state
+		) AS d
+		WHERE d.del_state ='Y'
+
+	</select>
+
+	<select id="getCountPname" parameterType="map" resultMap="extMap">
+		select count(t.pname) count,t.pname
+		from prescription t
+		where
+		t.del_state ='Y'
+		<if
+			test="startTime!=null and startTime!='' and endTime !=null and  endTime !=''">
+			and date_format(t.visit_time,'%Y-%m-%d') between #{startTime}
+			and
+			#{endTime}
+		</if>
+		group by t.pname order by count desc
+	</select>
+</mapper>

@@ -36,7 +36,7 @@ function goback() {
 <body>
 <table class="table table-hover text-center">
 	<tr>
-		<th style="text-align: center;">发生错误啦：${exception.message }</th>
+		<th style="text-align: center;">发生错误啦!${exception.message }</th>
 	</tr>
 	<tr>
 		<td>

@@ -1,10 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 
-<link rel="stylesheet"
-	href="../resources/js/select2/css/select2.min.css" />
+<link rel="stylesheet" href="../resources/js/select2/css/select2.min.css" />
 <style type="text/css">
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus,
 	.navbar-default .navbar-nav>.open>a:hover {
@@ -18,46 +16,43 @@
 	margin-right: 15px;
 }
 </style>
-<form id="modifySelfForm" action="${path}/user/editUser" method="post"
-	target="_self">
-	<input type="hidden" id="userId" name="userId" /> <input type="hidden"
-		name="modifySelf" value="Y" />
+<form id="modifySelfForm" action="${path}/user/editUser" method="post" target="_self">
+	<input type="hidden" id="userId" name="userId" />
+	<input type="hidden" name="modifySelf" value="Y" />
 </form>
 
-<div class="navbar navbar-default navbar-fixed-top"
-	style="z-index: 1; background: #1c99d3; color: #fff; border-color: #1c99d3;">
+<div class="navbar navbar-default navbar-fixed-top" style="z-index: 1; background: #1c99d3; color: #fff; border-color: #1c99d3;">
 	<nav>
 		<div class="container" style="margin: 0px; padding: 0px; width: 100%">
 
 			<div class="navbar-header">
 
-				<a class="navbar-brand" style="padding-top: 8px; margin: 0px;"
-					onclick="toMain()"> <span
-					style="line-height: 33px; margin-left: 0px; color: #fff;"><img
-						alt="江苏省中西医结合医院" class="brand" src="../resources/images/brand.png"
-						onclick="toMain()" height="50px;">中医药专家医案管理系统 </span>
+				<a class="navbar-brand" style="padding-top: 8px; margin: 0px;" onclick="toMain()">
+					<span style="line-height: 33px; margin-left: 0px; color: #fff;">
+						<img alt="江苏省中西医结合医院" class="brand" src="../resources/images/brand.png" onclick="toMain()" height="50px;">
+						中医药专家医案管理系统
+					</span>
 				</a>
 			</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse" id="bs-navbar"
-				style="margin-right: 30px;">
+			<div class="collapse navbar-collapse" id="bs-navbar" style="margin-right: 30px;">
 				<ul class="nav navbar-nav navbar-right pull-right">
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						id="mwidth" data-toggle="dropdown" role="button"
-						aria-haspopup="true" aria-expanded="false"
-						style="color: #fff; float: right;">
-							${sessionScope.currUser.userName } <span class="caret"></span>
-					</a>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" id="mwidth" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+							style="color: #fff; float: right;">
+							${sessionScope.currUser.userName }
+							<span class="caret"></span>
+						</a>
 						<ul class="dropdown-menu" id="swidth">
-							<li><a style="padding: 0; text-align: center;"
-								href="javascript:void(0);" onclick="logout()">退出</a></li>
-						</ul></li>
+							<li>
+								<a style="padding: 0; text-align: center;" href="javascript:void(0);" onclick="logout()">退出</a>
+							</li>
+						</ul>
+					</li>
 				</ul>
-				<div class="pull-right col-lg-2"
-					style="margin-top: 8px; float: left; margin-right: 20px;">
+				<div class="pull-right col-lg-2" style="margin-top: 8px; float: left; margin-right: 20px;">
 
-					<select class="form-control validate[required]" id="se"
-						style="height: 36px; margin-top: 11px">
+					<select class="form-control validate[required]" id="se" style="height: 36px; margin-top: 11px">
 						<option value=""></option>
 					</select>
 				</div>
@@ -67,10 +62,8 @@
 		</div>
 	</nav>
 </div>
-<script type="text/javascript"
-	src="../resources/js/select2/js/select2.min.js"></script>
-<script type="text/javascript"
-	src="../resources/js/select2/js/i18n/zh-CN.js"></script>
+<script type="text/javascript" src="../resources/js/select2/js/select2.min.js"></script>
+<script type="text/javascript" src="../resources/js/select2/js/i18n/zh-CN.js"></script>
 <script type="text/javascript">
 	function logout() {
 		var url = "${path}/login/exit";

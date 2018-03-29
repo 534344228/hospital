@@ -25,7 +25,7 @@ function changeInput(){
 
 function selectPagesize(obj){
 	var pageSize =$(obj).val();
-	var url = "${pageContext.request.contextPath }/sysCfg/savePageSize?pageSize="+pageSize+"&pageServletPath=${pageServletPath}";
+	var url = "${pageContext.request.contextPath }/sysCfg/savePageSize.action?pageSize="+pageSize+"&pageServletPath=${pageServletPath}";
 	ajaxPost(url, null, function(msg){
 		if(msg=="Y"){
 			topage(1);
